@@ -57,7 +57,6 @@ tasks.register<JavaExec>("types.ts") {
   dependsOn("classes")
   mainClass = "jvm2dts.Main"
   classpath = jvm2dts + sourceSets.main.get().runtimeClasspath
-  jvmArgs = listOf("--add-exports=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED") // Java 16+ needs this
   args("-data-only", // or omit this to include all classes
     "-exclude", ".*SuffixOfClassNameIDontWant|PrefixOfClassNameIDontWant.*",
     "-cast", "MyNumericClass=number",

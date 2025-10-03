@@ -1,6 +1,6 @@
 package jvm2dts;
 
-import jdk.internal.org.objectweb.asm.*;
+import org.objectweb.asm.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;

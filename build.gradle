@@ -8,11 +8,10 @@ version '1.9-SNAPSHOT'
 
 compileJava {
     sourceCompatibility = targetCompatibility = 17
-    options.compilerArgs.add('--add-exports=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED')
 }
 
 javadoc {
-    options.addStringOption('-add-exports=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED', '-quiet')
+    options.addStringOption('-quiet')
 }
 
 task sourcesJar(type: Jar) {
@@ -93,11 +92,11 @@ dependencies {
     testImplementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.1'
 
     implementation 'com.beust:jcommander:1.78'
+    implementation 'org.ow2.asm:asm:9.8' // TODO: switch to JEP-484, available Since Java 22
 }
 
 test {
     useJUnitPlatform()
-    jvmArgs = ["--add-exports=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED"]
 }
 
 jar {

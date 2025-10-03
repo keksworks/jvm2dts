@@ -4,9 +4,4 @@
     <option name="USE_RELEASE_OPTION" value="false" />
     <bytecodeTargetLevel target="21" />
   </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="jvm2dts.main" options="--add-exports=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED" />
-    </option>
-  </component>
 </project>
