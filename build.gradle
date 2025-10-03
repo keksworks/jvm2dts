@@ -4,11 +4,10 @@ plugins {
 }
 
 group 'com.github.codeborne'
-version '1.6-SNAPSHOT'
-
-sourceCompatibility = targetCompatibility = 17
+version '1.9-SNAPSHOT'
 
 compileJava {
+    sourceCompatibility = targetCompatibility = 17
     options.compilerArgs.add('--add-exports=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED')
 }
 
@@ -18,12 +17,12 @@ javadoc {
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
-    classifier = 'sources'
+    archiveClassifier.set('sources')
 }
 
 task javadocJar(type: Jar) {
     from javadoc
-    classifier = 'javadoc'
+    archiveClassifier.set('javadoc')
 }
 
 repositories {
@@ -86,7 +85,8 @@ publishing {
 
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     testImplementation 'org.assertj:assertj-core:3.15.0'
     testImplementation 'org.jetbrains:annotations:20.1.0'
