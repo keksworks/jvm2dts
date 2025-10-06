@@ -2,7 +2,6 @@ package jvm2dts;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 import java.lang.annotation.Retention;
@@ -54,7 +53,7 @@ class ClassConverterTest {
       "double?: number; " +
       "float?: number; " +
       "integer: number; " +
-      "long: number; " +
+      "long?: number; " +
       "optional?: string;" +
       "}");
   }
@@ -111,9 +110,9 @@ interface WrapperTypes {
   Byte getAByte();
   Short getAShort();
   Integer getInteger();
-  Long getLong();
   Boolean isBoolean();
-  @Nullable Float getFloat();
+  @org.jspecify.annotations.Nullable Long getLong();
+  @org.jetbrains.annotations.Nullable Float getFloat();
   @ClassConverterTest.Nullable Double getDouble();
   Optional<String> getOptional();
 }

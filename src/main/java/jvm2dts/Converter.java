@@ -139,9 +139,9 @@ public class Converter {
 
     fieldBuffer.append(propertyName);
 
-    if (!nonRuntimeAnnotations.isEmpty()) {
-      for (var annotation : nonRuntimeAnnotations.getOrDefault(method.getName(), emptyList()))
-        if (annotation.contains("Nullable;")) fieldBuffer.append("?");
+    if (nonRuntimeAnnotations.getOrDefault(method.getName(), emptyList()).stream().anyMatch(a -> a.contains("Nullable;")) ||
+        stream(method.getAnnotatedReturnType().getAnnotations()).anyMatch(a -> a.annotationType().getSimpleName().equals("Nullable"))) {
+      fieldBuffer.append("?");
     }
 
     var type = method.getReturnType();

@@ -89,6 +89,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     testImplementation 'org.assertj:assertj-core:3.15.0'
     testImplementation 'org.jetbrains:annotations:20.1.0'
+    testImplementation 'org.jspecify:jspecify:1.0.0'
     testImplementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.1'
 
     implementation 'com.beust:jcommander:1.78'
