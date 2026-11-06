@@ -86,7 +86,7 @@ public class Main {
     var pathString = path.toString();
     var baseString = basePath.toString();
     var relativePath = pathString.substring(baseString.length() + 1);
-    return relativePath.substring(0, relativePath.length() - ".class".length()).replace('/', '.');
+    return relativePath.substring(0, relativePath.length() - ".class".length()).replace('/', '.').replace('\\', '.');
   }
 
   private static boolean isInPackage(String className, Set<String> packages) {
