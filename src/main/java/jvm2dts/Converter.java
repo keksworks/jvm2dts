@@ -22,6 +22,7 @@ public class Converter {
 
   static final int ASM_VERSION = detectAsmVersion();
   TypeMapper typeMapper;
+  boolean skipTransient;
 
   static int detectAsmVersion() {
     try {
@@ -34,8 +35,13 @@ public class Converter {
     }
   }
 
-  public Converter(TypeMapper typeMapper) {
+  public Converter(TypeMapper typeMapper, boolean skipTransient) {
     this.typeMapper = typeMapper;
+    this.skipTransient = skipTransient;
+  }
+
+  public Converter(TypeMapper typeMapper) {
+    this(typeMapper, false);
   }
 
   public static String tsName(Class<?> clazz) {
@@ -118,6 +124,7 @@ public class Converter {
     var fieldBuffer = new StringBuilder();
 
     if (propertyName == null) return;
+    if (skipTransient && isTransient(method.getDeclaringClass(), propertyName)) return;
     var dashPos = propertyName.indexOf('-');
     if (dashPos > 0) propertyName = propertyName.substring(0, dashPos);
 
@@ -171,6 +178,16 @@ public class Converter {
     out.append(typeBuffer);
     if (isIterable) out.append("[]");
     out.append("; ");
+  }
+
+  private boolean isTransient(Class<?> cls, String propertyName) {
+    try {
+      var field = cls.getDeclaredField(propertyName);
+
+      return Modifier.isTransient(field.getModifiers());
+    } catch (NoSuchFieldException e) {
+      return false;
+    }
   }
 
   private static String toPropertyName(String name) {

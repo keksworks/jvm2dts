@@ -31,6 +31,9 @@ public class Main {
     @Parameter(names = {"-a", "-annotated"}, description = "Process only annotated classes with comma-separated annotations (note that lombok annotations are not visible in class files)")
     private String withAnnotations;
 
+    @Parameter(names = {"-skip-transient"}, description = "Process only non-transient properties")
+    private boolean skipTransient;
+
     @Parameter(names = {"-classesDir"}, description = "Recursively look for classes from a location")
     private String classesDir;
 
@@ -62,7 +65,7 @@ public class Main {
         customTypes.put(Class.forName(pair.split("=")[0]), pair.split("=")[1]);
       }
     }
-    var converter = new Converter(new TypeMapper(customTypes));
+    var converter = new Converter(new TypeMapper(customTypes), parsedArgs.skipTransient);
 
     try {
       var exclude = parsedArgs.excludeRegex;
